@@ -4,6 +4,8 @@ from groq import APIConnectionError
 import logging
 import os
 import httpx
+import re
+import json
 
 #httpx._config.verify = httpx.CertVerificationContext.from_file('C:\\Users\\NPAWAR8\\Downloads\\cacert.pem')
 #httpx._config.verify_ssl = 'C:\\Users\\NPAWAR8\\Downloads\\cacert.pem'
