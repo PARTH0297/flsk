@@ -1,0 +1,4 @@
+Flask
+groq
+langchain_groq 
+langchain_core
