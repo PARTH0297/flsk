@@ -35,7 +35,7 @@ def run_model(resume, job_description):
         chain = prompt | chat
 
         resp = chain.invoke({"resume": resume, "job_description": job_description})
-        return resp
+        return resp.json()
     except APIConnectionError as e:
         logging.error("Connection error: %s", e)
         return {"error": "Failed to connect to the Groq API. Please try again later."}
