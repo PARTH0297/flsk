@@ -18,12 +18,17 @@ def run_model(resume, job_description):
         chat = ChatGroq(temperature=0, groq_api_key="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", model_name="mixtral-8x7b-32768")
 
         system = """
-  I want you to assess the compatibility between the given resume and job description, consider overall resume for comparison.
-  Please provide a compatibility score in percentage.
-  Additionally,provide technical matching skills as well as technical missing skills just one word key and one word value,
-  I just need 3 keys -compatibility score,matching skills,missing skills
-  ouput in json format
-  """
+        I want you to assess the compatibility between the given resume and job description.
+        Your output must strictly be a JSON object with the following fields:
+        - "name": The candidate's name (string).
+        - "email": The candidate's email (string).
+        - "matchingSkills": A list of skills present in both the resume and the job description (array of strings).
+        - "missingSkills": A list of skills in the job description that are not found in the resume (array of strings).
+        - "compatibility": The compatibility percentage between the resume and job description (numerical value between 0 and 100).
+
+        Ensure your output strictly matches this format, and all fields are accurate based on the input.
+        """
+
 
         human = """
         Resume:
