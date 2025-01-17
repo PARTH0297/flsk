@@ -9,7 +9,7 @@ from groq import APIConnectionError
 
 def batch_model(resume, job_description):
     # Configure logging
-    logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
+    #logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 
     # Set up SSL/TLS handling securely
     cacert_path = 'C:\\Users\\NPAWAR8\\Downloads\\cacert.pem'  # Update to your actual path
