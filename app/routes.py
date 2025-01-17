@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from .langchain_integration import run_model
+from .batch_process import batch_model
 
 main = Blueprint('main', __name__)
 
@@ -14,5 +15,16 @@ def process():
     job_description = data.get('job_description')
 
     response = run_model(resume, job_description)
+    
+    return jsonify(response)
+
+
+@main.route('/evaluate', methods=['POST'])
+def processes():
+    data = request.json
+    resume = data.get('resume')
+    job_description = data.get('job_description')
+
+    response = batch_model(resume, job_description)
     
     return jsonify(response)
