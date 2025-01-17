@@ -12,12 +12,12 @@ def batch_model(resume, job_description):
     #logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 
     # Set up SSL/TLS handling securely
-    cacert_path = 'C:\\Users\\NPAWAR8\\Downloads\\cacert.pem'  # Update to your actual path
-    if os.path.exists(cacert_path):
-        httpx._config.verify = cacert_path
-    else:
-        logging.warning("SSL certificate not found, disabling verification.")
-        os.environ['HTTPX_DISABLE_CERT_VERIFICATION'] = '1'
+    # cacert_path = 'C:\\Users\\NPAWAR8\\Downloads\\cacert.pem'  # Update to your actual path
+    # if os.path.exists(cacert_path):
+    #     httpx._config.verify = cacert_path
+    # else:
+    #     logging.warning("SSL certificate not found, disabling verification.")
+    #     os.environ['HTTPX_DISABLE_CERT_VERIFICATION'] = '1'
 
     try:
         # Initialize Groq Chat Model
