@@ -57,7 +57,7 @@ def batch_model(resume, job_description):
 Your response must strictly follow this format. Classify skills into these categories:
 1. **Must-Have Skills**: Critical technical skills present in both the resume and job description.
 2. **Good-to-Have Skills**: Technical skills that are desirable but not critical, and present in both.
-3. **Extra Skills**: Technical skills found in the resume but not listed in the job description.
+3. **Extra Skills**: Technical skills found in the resume but not listed in the job description(only give 10 Extra Skills major ones).
 
 Please focus on **technical skills** only, excluding any **soft skills** such as leadership, communication, and problem-solving abilities. For each skill, include a description of the level of experience and relevance to the job role.
 """
