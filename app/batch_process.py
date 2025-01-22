@@ -7,6 +7,21 @@ from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from groq import APIConnectionError
 
+
+def naive_json_from_text(text):
+    # Regular expression to match everything between the first { and the last }
+    match = re.search(r'\{[\s\S]*\}', text)
+    if not match:
+        return None
+    try:
+        return json.loads(match.group(0))  # Try parsing the matched JSON
+    except json.JSONDecodeError:
+        return None  # Return None if JSON parsing fails
+
+
+
+
+
 def batch_model(resume, job_description):
     # Configure logging
     #logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -57,7 +72,7 @@ def batch_model(resume, job_description):
 Your response must strictly follow this format. Classify skills into these categories:
 1. **Must-Have Skills**: Critical technical skills present in both the resume and job description.
 2. **Good-to-Have Skills**: Technical skills that are desirable but not critical, and present in both.
-3. **Extra Skills**: Technical skills found in the resume but not listed in the job description(only give 10 Extra Skills major ones).
+3. **Extra Skills**: Technical skills found in the resume but not listed in the job description(only give 7 to 20 Extra Skills major ones).
 
 Please focus on **technical skills** only, excluding any **soft skills** such as leadership, communication, and problem-solving abilities. For each skill, include a description of the level of experience and relevance to the job role.
 """
@@ -79,13 +94,27 @@ Please focus on **technical skills** only, excluding any **soft skills** such as
         logging.info("Sending request to Groq model...")
         resp = chain.invoke({"resume": resume, "job_description": job_description})
 
-        # Parse JSON response
+        # # Parse JSON response
+        # try:
+        #     result_json = json.loads(resp.content)
+        #     return result_json
+        # except json.JSONDecodeError:
+        #     logging.error("Failed to parse JSON from response.")
+        #     raise ValueError("The Groq API returned an invalid JSON response.")
+
+                # Try parsing the response as JSON directly
         try:
             result_json = json.loads(resp.content)
             return result_json
         except json.JSONDecodeError:
-            logging.error("Failed to parse JSON from response.")
-            raise ValueError("The Groq API returned an invalid JSON response.")
+            logging.warning("Failed to parse JSON directly. Attempting to extract JSON from the text...")
+            # Use naive approach to extract potential JSON from the response text
+            result_json = naive_json_from_text(resp.content)
+            if result_json is None:
+                raise ValueError("The Groq API response does not contain valid JSON.")
+            return result_json
+
+
 
     except APIConnectionError as e:
         logging.error("Groq API connection error: %s", e)
