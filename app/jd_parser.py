@@ -20,7 +20,7 @@ def parse_job_description(job_description):
     Returns a JSON object with parsed data.
     """
     try:
-        api_key = "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"
+        api_key = "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"
         client = Groq(api_key=api_key)
 
         # System and Human Prompt Definitions

@@ -9,17 +9,14 @@ from groq import Groq, APIConnectionError, RateLimitError
 
 # List of API keys for rotation
 API_KEYS = [
-    "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",
-    "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",
-    "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",
-    "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",
-    "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",
     "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",
     "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",
     "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",
     "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",
     "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",
-    "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"
+    "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",
+    "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"
+    
     
 ]
 current_api_index = 0  # Index to track current API key usage
