@@ -58,7 +58,7 @@ def parse_job_description(job_description):
 
         # Invoke Groq Client
         completion = client.chat.completions.create(
-            model="mixtral-8x7b-32768",
+            model="deepseek-r1-distill-llama-70b",
             messages=messages,
             temperature=0.1,
             top_p=1,
