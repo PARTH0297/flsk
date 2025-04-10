@@ -134,7 +134,7 @@ def batch_model(resume, job_details, retry_attempts=3):
 
             # Invoke Groq API
             completion = client.chat.completions.create(
-                model="mixtral-8x7b-32768",
+                model="deepseek-r1-distill-llama-70b",
                 messages=messages,
                 temperature=0.1,
                 top_p=1,
